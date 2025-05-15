@@ -1,0 +1,41 @@
+# Python cache
+_pycache_/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+env/
+*.env
+
+# Logs
+*.log
+
+# Git and VCS
+.git/
+.gitignore
+
+# Docker-specific
+Dockerfile
+.dockerignore
+
+# IDE/editor folders and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Testing/output artifacts
+.coverage
+coverage/
+htmlcov/
+dist/
+build/
+
+# OS files
+.DS_Store
+
+# Optional: DB files (if using SQLite)
+*.db

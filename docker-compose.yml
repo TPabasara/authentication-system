@@ -1,0 +1,21 @@
+services:
+  back:
+    build: ./back
+    container_name: back_end
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./back:/app
+    env_file:
+      - ./back/.env
+
+  frontend:
+    build: ./frontend
+    container_name: front_end
+    ports:
+      - "3000:3000"
+    depends_on:
+      - back
+
+    stdin_open: true
+    tty: true
