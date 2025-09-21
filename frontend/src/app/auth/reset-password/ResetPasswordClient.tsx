@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -98,6 +98,127 @@ export default function ResetPassword() {
             className="text-black items-start mt-2 w-3/4 rounded-lg h-10 bg-green-300
             pl-2"
           >
+            {error}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}*/
+
+"use client";
+
+import axios from "axios";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+export default function ResetPasswordClient() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const [user, setUser] = useState<string | null>(null);
+  const [error, setError] = useState("");
+  const [flag1, setFlag1] = useState(false); // success
+  const [flag2, setFlag2] = useState(false); // error
+
+  // Safely read query param on client
+  useEffect(() => {
+    const u = searchParams.get("user");
+    if (!u) {
+      setFlag1(false);
+      setFlag2(true);
+      setError("Invalid or missing reset token.");
+    } else {
+      setUser(u);
+    }
+  }, [searchParams]);
+
+  const Reset = (formData: FormData) => {
+    if (!user) return;
+
+    const password1 = formData.get("password1") as string;
+    const password2 = formData.get("password2") as string;
+
+    if (!password1 || !password2) {
+      setFlag1(false);
+      setFlag2(true);
+      setError("Please fill in both password fields.");
+      return;
+    }
+
+    if (password1 !== password2) {
+      setFlag1(false);
+      setFlag2(true);
+      setError("Passwords do not match.");
+      return;
+    }
+
+    axios
+      .put(`${process.env.NEXT_PUBLIC_SERVER}/resetPassword/${user}`, {
+        password1,
+        password2,
+      })
+      .then((res) => {
+        setFlag2(false);
+        setFlag1(true);
+        setError(res.data);
+        router.push("/auth/login-signup");
+      })
+      .catch((err) => {
+        setFlag1(false);
+        setFlag2(true);
+        setError(
+          err.response?.data?.detail || "Something went wrong, try again"
+        );
+      });
+  };
+
+  return (
+    <div className="bg-blue-600 flex items-center justify-center h-screen">
+      <div className="w-1/5 bg-white rounded-lg h-2/4 flex flex-col items-center">
+        <p className="font-inter font-medium text-3xl mt-4">New Password</p>
+        <p className="mt-2 text-sm h-10 flex items-center px-2">
+          Enter your new password
+        </p>
+        <form
+          className="flex flex-col w-3/4 mt-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            Reset(formData);
+          }}
+        >
+          <input
+            type="password"
+            placeholder="New Password"
+            className="rounded-lg pl-2 border-1 mt-4 h-10"
+            name="password1"
+            minLength={8}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            className="rounded-lg pl-2 border-1 mt-4 h-10"
+            name="password2"
+            minLength={8}
+            required
+          />
+          <button
+            type="submit"
+            className="bg-blue-600 text-white mt-4 h-10 rounded-lg cursor-pointer active:bg-blue-500"
+          >
+            Change
+          </button>
+        </form>
+
+        {flag2 && (
+          <p className="text-black items-start mt-2 w-3/4 rounded-lg h-10 bg-red-300 pl-2">
+            {error}
+          </p>
+        )}
+        {flag1 && (
+          <p className="text-black items-start mt-2 w-3/4 rounded-lg h-10 bg-green-300 pl-2">
             {error}
           </p>
         )}
