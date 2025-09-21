@@ -21,7 +21,7 @@ export default function LoginSignup() {
     }; //create a JSON object to send data to the backend
 
     axios
-      .post("http://127.0.0.1:8000/signup/", postData)
+      .post(`${process.env.NEXT_PUBLIC_SERVER}/signup/`, postData)
       .then((responds) => {
         setFlag1(true); //set the flag to true if the signup is successful
         setSignUpError(`signed up successfully`); //If the server responds with a successful status code (200–299) set this success message to be displayed.
@@ -50,7 +50,7 @@ export default function LoginSignup() {
       password: userPassword,
     }; //create a JSON object to send data to the backend
     axios
-      .post("http://127.0.0.1:8000/signin/", postData)
+      .post(`${process.env.NEXT_PUBLIC_SERVER}/signin/`, postData)
       .then((responds) => {
         setFlag2(true); //set the flag to true if the signup is successful
         setSuccess(`signed in successfully`); //If the server responds with a successful status code (200–299) set this success message to be displayed.

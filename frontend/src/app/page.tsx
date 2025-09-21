@@ -3,6 +3,7 @@ export default function Home() {
   return (
     <div>
       <LoginSignup />
+      console.log(process.env.SERVER);
     </div>
   );
 }

@@ -27,7 +27,10 @@ export default function ResetPassword() {
 
     console.log(user);
     axios
-      .put(`http://127.0.0.1:8000/resetPassword/${user}`, SubmitData)
+      .put(
+        `${process.env.NEXT_PUBLIC_SERVER}/resetPassword/${user}`,
+        SubmitData
+      )
       .then((response) => {
         setFlag2(false);
         setFlag1(true);
