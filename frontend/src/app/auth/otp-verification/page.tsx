@@ -61,7 +61,7 @@ export default function Verify() {
             Verify
           </button>
         </form>
-        <p className="mt-5">Don't receive OTP code?</p>
+        <p className="mt-5">{"Don't receive OTP code?"}</p>
         <Link href="\auth\forgot-password">
           <p className="text-sm cursor-pointer hover:underline mt-2 text-blue-600">
             Resend Code

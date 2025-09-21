@@ -21,8 +21,8 @@ export default function LoginSignup() {
     }; //create a JSON object to send data to the backend
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER}/signup/`, postData)
-      .then((responds) => {
+      .post(`${process.env.NEXT_PUBLIC_SERVER}/signup/`, postData) //remove reponse inside then.
+      .then(() => {
         setFlag1(true); //set the flag to true if the signup is successful
         setSignUpError(`signed up successfully`); //If the server responds with a successful status code (200–299) set this success message to be displayed.
       })
@@ -51,7 +51,7 @@ export default function LoginSignup() {
     }; //create a JSON object to send data to the backend
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER}/signin/`, postData)
-      .then((responds) => {
+      .then(() => {
         setFlag2(true); //set the flag to true if the signup is successful
         setSuccess(`signed in successfully`); //If the server responds with a successful status code (200–299) set this success message to be displayed.
       })
