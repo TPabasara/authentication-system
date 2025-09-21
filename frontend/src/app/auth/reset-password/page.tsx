@@ -60,7 +60,14 @@ export default function ResetPassword() {
         <p className="mt-2 text-sm h-10 flex items-center px-2">
           Enter your new password
         </p>
-        <form className="flex flex-col w-3/4 mt-2" action={Reset}>
+        <form
+          className="flex flex-col w-3/4 mt-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            Reset(formData);
+          }}
+        >
           <input
             type="password"
             placeholder="New Password"
