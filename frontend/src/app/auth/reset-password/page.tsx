@@ -1,12 +1,11 @@
-// app/auth/reset-password/page.tsx
 import ResetPassword from "./ResetPasswordClient";
 
 export default function Page({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams?: Record<string, string | string[] | undefined>;
 }) {
-  const user = searchParams.user as string | undefined;
+  const user = searchParams?.user as string | undefined;
 
   return <ResetPassword user={user} />;
 }
