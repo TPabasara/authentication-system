@@ -1,6 +1,12 @@
-// This is a simple server component that only renders the client part
-import ResetPasswordClient from "./ResetPasswordClient";
+// app/auth/reset-password/page.tsx
+import ResetPassword from "./ResetPasswordClient";
 
-export default function Page() {
-  return <ResetPasswordClient />;
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const user = searchParams.user as string | undefined;
+
+  return <ResetPassword user={user} />;
 }
