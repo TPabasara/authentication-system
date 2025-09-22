@@ -1,6 +1,13 @@
 import ResetPassword from "./ResetPasswordClient";
 
-export default function Page({ searchParams }: { searchParams?: any }) {
-  const user = searchParams?.user as string | undefined;
+type SearchParams = { [key: string]: string | string[] | undefined };
+
+interface PageProps {
+  searchParams?: SearchParams;
+}
+
+export default function Page({ searchParams }: PageProps) {
+  const user =
+    typeof searchParams?.user === "string" ? searchParams.user : undefined;
   return <ResetPassword user={user} />;
 }
