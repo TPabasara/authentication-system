@@ -8,7 +8,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "https://authentication-system-qg9y.vercel.app/signup/"
+    "https://authentication-system-front.vercel.app"
 ]
 
 app.add_middleware(
