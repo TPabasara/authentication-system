@@ -140,16 +140,19 @@ function ResetPasswordForm() {
       setFlag1(true);
       setError(response.data);
       router.push("/auth/login-signup");
-    } catch (error: any) {
-      if (error.response?.data?.detail) {
-        setFlag1(false);
-        setFlag2(true);
-        setError(error.response.data.detail);
-      } else {
-        setFlag1(false);
-        setFlag2(true);
-        setError("Something went wrong, try again");
+    } catch (error: unknown) {
+      // ✅ Safe type check instead of `any`
+      if (axios.isAxiosError(error)) {
+        if (error.response?.data?.detail) {
+          setFlag1(false);
+          setFlag2(true);
+          setError(error.response.data.detail);
+          return;
+        }
       }
+      setFlag1(false);
+      setFlag2(true);
+      setError("Something went wrong, try again");
     }
   }
 
