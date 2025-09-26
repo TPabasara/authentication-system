@@ -8,9 +8,7 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",
-    "https://localhost:3000",
-    "https://authentication-system-r8q9.onrender.com",
+    "https://authentication-system-qg9y.vercel.app",
 ]
 
 app.add_middleware(
