@@ -7,13 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
-#origins = [
- #   "https://authentication-system-qg9y.vercel.app"
-#]
+origins = [
+    "https://authentication-system-qg9y.vercel.app"
+]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
