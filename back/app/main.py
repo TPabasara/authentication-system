@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
-origins = ["*"]
-#https://authentication-system-front.vercel.app
+origins = ["https://authentication-system-front.vercel.app"]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
