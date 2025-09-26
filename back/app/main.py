@@ -10,7 +10,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "https://localhost:3000",
-    "https://your-backend.onrender.com",
+    "https://authentication-system-r8q9.onrender.com",
 ]
 
 app.add_middleware(
