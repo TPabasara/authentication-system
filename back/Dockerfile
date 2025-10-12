@@ -1,7 +1,7 @@
 # back/Dockerfile
 FROM python:3.12-slim
 
-WORKDIR /app
+WORKDIR /opt/app/backend
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt

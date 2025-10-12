@@ -1,7 +1,7 @@
 # frontend/Dockerfile
 FROM node:20.15.0-slim
 
-WORKDIR /app
+WORKDIR /opt/app/frontend
 
 COPY package*.json ./
 RUN npm install
