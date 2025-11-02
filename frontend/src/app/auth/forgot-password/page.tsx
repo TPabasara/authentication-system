@@ -15,7 +15,7 @@ export default function Fogot() {
       email: userEmail,
     };
     axios
-      .post("http://127.0.1:8000/forgot-password/", postData)
+      .post(`${process.env.NEXT_PUBLIC_SERVER}/forgot-password/`, postData)
       .then((responds) => {
         setFlag2(false);
         setFlag1(true);

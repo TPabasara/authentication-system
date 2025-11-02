@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: authentication-app
+    type: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: frontend-pod
+      labels:
+        app: authentication-app
+        type: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: pabasarat792/frontend
+          env:
+            - name: frontend-port
+              valueFrom:
+                configMapKeyRef:
+                  key: NEXT_PUBLIC_SERVER
+                  name: frontend-config
+          ports:
+            - containerPort: 3000

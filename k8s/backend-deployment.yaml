@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: authentication-app
+    type: backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: backend
+  template:
+    metadata:
+      name: backend-pod
+      labels:
+        app: authentication-app
+        type: backend
+    spec:
+      containers:
+        - name: backend
+          image: pabasarat792/backend
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-auth
+                  key: DATABASE_URL
+            - name: EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: backend-auth
+                  key: EMAIL
+            - name: EMAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: backend-auth
+                  key: EMAIL_PASS
+          ports:
+            - containerPort: 8000

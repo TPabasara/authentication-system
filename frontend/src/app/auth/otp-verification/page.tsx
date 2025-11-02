@@ -16,7 +16,7 @@ export default function Verify() {
       otp: otp1, //this should be the name exacly in the back end schemas.
     };
     axios
-      .post("http://127.0.0.1:8000/otp/", submitData)
+      .post(`${process.env.NEXT_PUBLIC_SERVER}/otp/`, submitData)
       .then((response) => {
         setFlag2(false);
         setFlag1(true);
